@@ -1,0 +1,7 @@
+.table{
+	border: 2px solid black;
+	width: 40%;
+	border-spacing: 0;
+	background-color: palegoldenrod;
+	border-collapse: collapse;
+}

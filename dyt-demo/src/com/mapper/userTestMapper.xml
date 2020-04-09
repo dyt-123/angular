@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UserDao">
+	
+	<!-- <resultMap id="resltSql" type="com.entity.UserTest">
+	    <id column="u_id"    property="id" />
+		    <result column="u_name"   property="name" />
+		    <result column="u_age"   property="age" />
+		    <result column="u_tel"   property="tel" />
+		    
+		    对象
+		  	<association property="dev" javaType="com.entity.UserInfo">
+	    		<id column="d_id"  property="id"/>
+	    		<result  column="d_name"  property="name"/>
+	  		</association>
+	  		
+	  		
+	  		对象集合
+			<collection property="dep" javaType="list" ofType="com.entity.Department" >
+				<id column="d_id"  property="id" />
+				<result column="d_name"  property="name" />
+			</collection>
+			<collection property="post" javaType="list" ofType="com.entity.Post" >
+				<id column="p_id"  property="id" />
+				<result column="p_name"  property="name" />
+			</collection>
+			<collection property="keshi" javaType="list" ofType="com.entity.Keshi" >
+				<id column="k_id"  property="id" />
+				<result column="k_name"  property="name" />
+			</collection>
+    
+	</resultMap> -->
+	
+	<select id="getTestAll" resultType="com.entity.UserInfo" >
+			SELECT
+			*
+		FROM
+			dyt_user du
+		LEFT JOIN dyt_post AS dp ON du.pid = dp.id
+		LEFT JOIN dyt_department dd ON du.did = dd.id
+		LEFT JOIN dyt_keshi dk ON du.kid = dk.id
+	</select>
+	
+</mapper>

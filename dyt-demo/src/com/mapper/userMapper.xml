@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UserDao">
+	
+	
+	<delete id="del" parameterType="Integer">
+		delete from dyt_user where id=#{id}
+	</delete>
+	
+	
+	<delete id="deleteIds" >
+		delete from dyt_user where id in
+		<foreach collection="ids" item="ids" open="(" separator="," close=")">
+			#{ids}
+		</foreach>
+	</delete>
+	
+	
+	
+	<!--定义 重复使用的SQL语句 -->
+	<!-- <sql id="sqlBu">
+		id,name,age,tel,did,pid,kid
+	</sql>
+	
+	<select id="xxx" parameterType="xxx">
+		select 
+		<include refid="sqlBu"/>
+		 from dyt_user
+	
+	</select> -->
+	
+	
+	
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="Integer">
+	     select count(1) from dyt_user where 1=1
+	     <if test="name!=null and name!=''">
+	         and name like  concat('%',#{name},'%')
+	     </if>
+	     
+	</select>
+	<select id="getList" resultType="com.entity.User" parameterType="com.entity.PageBean">
+		SELECT
+			du.id,
+			du.name,
+			du.age,
+			du.tel,
+			dp. NAME AS postName,
+			dd. NAME AS devName,
+			dk. NAME AS keshiName
+		FROM
+			dyt_user du
+		LEFT JOIN dyt_post AS dp ON du.pid = dp.id
+		LEFT JOIN dyt_department dd ON du.did = dd.id
+		LEFT JOIN dyt_keshi dk ON du.kid = dk.id  where 1=1
+		
+		<if test="map.name!=null and map.name!=''">
+	 		and du.name like concat('%',#{map.name},'%')
+	 	</if>
+	 	
+		limit #{beginCount} ,#{pageCount}
+	</select>
+	
+	
+	<select id="editById"  resultType="com.entity.Userpdk" parameterType="Integer">
+		select *from dyt_user where id=#{id}
+	</select>
+	
+	<select id="getAll"  resultType="com.entity.User">
+		SELECT
+			du.id,
+			du.name,
+			du.age,
+			du.tel,
+			dp. NAME AS postName,
+			dd. NAME AS devName,
+			dk. NAME AS keshiName
+		FROM
+			dyt_user du
+		LEFT JOIN dyt_post AS dp ON du.pid = dp.id
+		LEFT JOIN dyt_department dd ON du.did = dd.id
+		LEFT JOIN dyt_keshi dk ON du.kid = dk.id
+		
+	</select>
+	
+	<select id="seachAllByName"  resultType="com.entity.User" parameterType="String">
+		select du.name,du.age,du.tel,dp.name,dd.name from dyt_user du 
+
+		 LEFT JOIN dyt_post as dp ON du.pid=dp.id 
+		 LEFT JOIN  dyt_department dd on du.did=dd.id 
+		 LEFT JOIN dyt_keshi dk on du.kid=dk.id 
+			where du.name like concat('%',#{du.name},'%')
+	</select>
+	
+	<insert id="addUser" parameterType="com.entity.Userpdk" >
+	
+		insert into dyt_user(name,age,tel,did,pid,kid) values(#{name},#{age},#{tel},#{did},#{pid},#{kid})
+	
+	</insert>
+	
+	
+	<update id="upDateUser" parameterType="com.entity.Userpdk">
+		
+		update dyt_user
+			<set>
+				<if test="name!=null and name!=''">
+					name=#{name},
+				</if>
+				
+				<if test="age!=0">
+					age=#{age},
+				</if>
+				<if test="tel!=null and tel!=''">
+					tel=#{tel},
+				</if>
+				<if test="did!=0">
+					did=#{did},
+				</if>
+				<if test="pid!=0">
+					pid=#{pid},
+				</if>
+				<if test="kid!=0">
+					kid=#{kid},
+				</if>
+			</set>
+		where id=#{id}
+	</update>
+	
+</mapper>

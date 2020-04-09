@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="mmc"
+  id="myeclipse.1566267218723"
+  context-root="/mmc"
+  j2ee-spec="5.0"
+  archive="mmc.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

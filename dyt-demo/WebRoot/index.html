@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+  	
+  	<meta charset="utf-8" />
+	<title>我的测试页面</title>
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<link 	rel="stylesheet" href="css/style.css">
+	<script src="js/jquery.js"></script>
+    <script src="js/angular.min.js"></script>
+  	<script src="js/angular-ui-router.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="angularjs/app.js" type="text/javascript" charset="utf-8"></script>
+    <script src="angularjs/controller.js" type="text/javascript" charset="utf-8"></script>
+    <script src="angularjs/service.js" 	type="text/javascript" charset="utf-8"></script>
+  </head>
+  <body ng-controller="appCtrl">
+   
+   	<div class="">
+		<h2>{{world}}------{{greet}}</h2>
+	</div>
+	
+	
+	<div ui-view></div>
+	
+	<hello></hello>
+  </body>
+</html>
